@@ -1,3 +1,59 @@
 % This is the start of homework 1
 % I think I will start from latex scratch and build it up
 % as an article, just to cut down on some of the cruft.
+
+\title{CS690 Homework 1}
+\author{Ted Satcher}
+\documentclass[12pt]{article}
+\usepackage{cite}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section*{Definitions}
+\subsection*{Process switch}
+A process switch is when the operating system suspends a process
+currently executing, saves the state of the process switches to, and
+begins executing another process in the ready queue.  This is a key
+feature of a multiprogramming operating system.  It enables multiple
+programs to execute on a single CPU ~\cite{stallings}.
+
+\subsection*{Multiprogramming}
+Multiprogramming is the feature of an operating system that permits
+multiple programs to execute concurrently on a CPU. Generally, a
+number of executing programs are kept in main memeory and the
+operating system switcheds between the programs based on various
+criteria ~\cite{stallings}.
+
+\subsection*{System call}
+A system call is a request mad by a user program to the operating
+system.  The user request is for data or a resource that requires the
+execution of priviledged instructions.  System calls are the means by
+which programs can do work requiring priviledged access by proxying
+those requests through the operating system ~\cite{stallings}.
+
+\subsection*{Semaphore}
+A semaphore is a synchronization primitive, invented by Dijkstra, that
+can be used by cooperating processes or threads to access a shared
+resource or data.  Semaphores are implemented as a simple counter that
+can only be incremented or decremented using special, atomic function
+calls.  these calls may or man not block based on the value of the
+semaphore.  Semaphores are one of several methodes processes and
+threads can use to coordinate their activities ~\cite{stallings}.
+Semaphores can be used to implement other types of synchronization
+primitives such as mutexes.
+
+\section*{Process Switch Triggers}
+List two events that can trigger a process switch.
+
+\section*{Live Migration}
+Explain what ``live'' migration meand and cite some of its benefits
+
+\section*{Design Principles of a Multikernel}
+State and explain three design principles for a multikern
+
+\section*{Scalability of OS Locks}
+
+\bibliography{homework1}{}
+\bibliographystyle{plain}
+\end{document}
