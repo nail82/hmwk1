@@ -12,11 +12,11 @@
 
 \section*{Definitions}
 \subsection*{Process switch}
-A process switch is when the operating system suspends a process
-currently executing, saves the state of the process switches to, and
-begins executing another process in the ready queue.  This is a key
-feature of a multiprogramming operating system.  It enables multiple
-programs to execute on a single CPU ~\cite{stallings}.
+A process switch is when the operating system suspends execution of
+one process and begins executing another process selected from the
+ready queue.  This is a key feature of a multiprogramming operating
+system and it enables multiple programs to execute on a single CPU
+~\cite{stallings}.
 
 \subsection*{Multiprogramming}
 Multiprogramming is the feature of an operating system that permits
@@ -26,8 +26,8 @@ operating system switches between the programs based on various
 criteria ~\cite{stallings}.
 
 \subsection*{System call}
-A system call is a request mad by a user program to the operating
-system.  The user request is for data or a resource that requires the
+A system call is a request made by a user program to the operating
+system.  The user request is for data or a resource that requires
 execution of privileged instructions.  System calls are the means by
 which programs can do work requiring privileged access by proxying
 those requests through the operating system ~\cite{stallings}.
@@ -35,11 +35,11 @@ those requests through the operating system ~\cite{stallings}.
 \subsection*{Semaphore}
 A semaphore is a synchronization primitive, invented by Dijkstra
 ~\cite{wikipedia-semaphore}, that can be used by cooperating processes
-or threads to access a shared resource or data.  Semaphores are
-implemented as a simple counter that can only be incremented or
-decremented using special, atomic function calls.  these calls may or
-man not block based on the value of the semaphore.  Semaphores are one
-of several methods processes and threads can use to coordinate their
+or threads to access a shared resource.  Semaphores are implemented as
+a simple counter that can only be incremented or decremented using
+special, atomic function calls.  These calls may or may not block
+based on the value of the semaphore.  Semaphores are one of several
+method that processes and threads can use to coordinate their
 activities ~\cite{stallings}.  Semaphores can be used to implement
 other types of synchronization primitives such as mutexes.
 
@@ -95,8 +95,8 @@ to be abandoned beyond 80 cores.
 Also, the authors point out that modern CPU hardware is evolving
 toward a network-on-a-chip architecture.  They argue that future
 operating systems must operate in a distributed manner to take
-advantage of this architecture change and treating the hardware as
-a network leverages previous work in distributed systems.
+advantage of this architectural change. Treating the hardware as a
+network also leverages previous work in distributed system design.
 
 
 \subsection*{Hardware Neutral}
@@ -107,10 +107,11 @@ enhancing features offered by hardware vendors.
 Restructuring is a cross-cutting coding exercise that is labor
 intensive and error prone.  The authors instead suggest limiting
 hardware specific code to the message transport mechanism provided by
-hardware and to the interface boundary between the CPU and devices.
-This will reduce the surface area of code exposed to hardware changes
-allowing designers to abstract message passing algorithms without
-worrying about how the messages are passed around the system.
+the hardware and to the interface boundary between the CPU and
+devices.  This will reduce the surface area of code exposed to
+hardware changes allowing designers to abstract message passing
+algorithms without worrying about how the messages are passed around
+the system.
 
 \subsection*{Replicated State}
 The alternative to replicated state is for the OS to maintain a single
@@ -118,7 +119,7 @@ copy of shared state data.
 
 The authors justify replicating state by pointing out state
 replication can reduce the load on system interconnects associated
-with coherency.  Also, this is the only feasible approach when share
+with coherency.  Also, this is the only feasible approach when shared
 memory is not provided by the hardware.  Finally, replication provides
 an avenue to dynamically scale the operating system based on runtime
 events (i.e. reducing power consumption).
@@ -130,8 +131,8 @@ order to serialize access by multiple threads of execution.  These
 operating systems started their life with a few locks, covering large
 areas of code.  The process of scaling has been one of reducing the
 amount of code covered by the locks while increasing the number of
-locks, the so-called granularity of the locks.  Problems have
-arisen from increasing lock granularity.
+locks, improving the so-called granularity of the locks.  Problems
+have arisen from increasing lock granularity.
 
 One problem is the error prone nature of adding locks.  The authors
 point out the limitations of current system languages with respect to
