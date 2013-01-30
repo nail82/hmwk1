@@ -82,7 +82,7 @@ are~\cite{barrelfish}:
   \item View state as replicated instead of shared.
 \end{enumerate}
 
-\subsection{Explicit Communication}
+\subsection*{Explicit Communication}
 The alternative to explicit inter-core communication is to use shared
 memory for communication and/or rely on a coherent cache visible to
 all processors.
@@ -99,7 +99,7 @@ advantage of this architecture change and treating the hardware as
 a network leverages previous work in distributed systems.
 
 
-\subsection{Hardware Neutral}
+\subsection*{Hardware Neutral}
 The alternative to maintaining hardware neutrality is to continually
 restructure the operating system to take advantage of performance
 enhancing features offered by hardware vendors.
@@ -112,7 +112,7 @@ This will reduce the surface area of code exposed to hardware changes
 allowing designers to abstract message passing algorithms without
 worrying about how the messages are passed around the system.
 
-\subsection{Replicated State}
+\subsection*{Replicated State}
 The alternative to replicated state is for the OS to maintain a single
 copy of shared state data.
 
@@ -143,7 +143,6 @@ numbers of cores and large locks perform badly on high core count
 machines.
 
 
-
-\bibliography{homework1}{}
-\bibliographystyle{plain}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,homework1}
 \end{document}
