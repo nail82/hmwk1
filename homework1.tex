@@ -21,38 +21,128 @@ programs to execute on a single CPU ~\cite{stallings}.
 \subsection*{Multiprogramming}
 Multiprogramming is the feature of an operating system that permits
 multiple programs to execute concurrently on a CPU. Generally, a
-number of executing programs are kept in main memeory and the
-operating system switcheds between the programs based on various
+number of executing programs are kept in main memory and the
+operating system switches between the programs based on various
 criteria ~\cite{stallings}.
 
 \subsection*{System call}
 A system call is a request mad by a user program to the operating
 system.  The user request is for data or a resource that requires the
-execution of priviledged instructions.  System calls are the means by
-which programs can do work requiring priviledged access by proxying
+execution of privileged instructions.  System calls are the means by
+which programs can do work requiring privileged access by proxying
 those requests through the operating system ~\cite{stallings}.
 
 \subsection*{Semaphore}
-A semaphore is a synchronization primitive, invented by Dijkstra, that
-can be used by cooperating processes or threads to access a shared
-resource or data.  Semaphores are implemented as a simple counter that
-can only be incremented or decremented using special, atomic function
-calls.  these calls may or man not block based on the value of the
-semaphore.  Semaphores are one of several methodes processes and
-threads can use to coordinate their activities ~\cite{stallings}.
-Semaphores can be used to implement other types of synchronization
-primitives such as mutexes.
+A semaphore is a synchronization primitive, invented by Dijkstra
+~\cite{wikipedia-semaphore}, that can be used by cooperating processes
+or threads to access a shared resource or data.  Semaphores are
+implemented as a simple counter that can only be incremented or
+decremented using special, atomic function calls.  these calls may or
+man not block based on the value of the semaphore.  Semaphores are one
+of several methods processes and threads can use to coordinate their
+activities ~\cite{stallings}.  Semaphores can be used to implement
+other types of synchronization primitives such as mutexes.
 
 \section*{Process Switch Triggers}
-List two events that can trigger a process switch.
+One event that can trigger a process switch is when a process exceeds
+its allotted time for continuous execution.  Another event is when the
+operating system preempts a process to execute a higher priority task.
 
 \section*{Live Migration}
-Explain what ``live'' migration meand and cite some of its benefits
+The term live migration refers to the process of moving an executing
+virtual machine from one physical hardware location to another.
+Typically the goal is to execute the move without disturbing the user
+of the virtual machine. VMware implements this feature as part of
+their server product line with the trade name vMotion ~\cite{vmware}.
+
+A Wikipedia article on live migration ~\cite{wikipedia-migration}
+discusses several methods currently used to move the execution image
+of an operating virtual machine to new hardware.  The thorniest
+problems seem to lie in transporting the image of the virtual
+machine's main memory.
+
+There are numerous benefits that can be realized with this technology.
+One such benefit is hardware load balancing.  If a machine executing
+more than one virtual machine instance comes under heavy user load,
+one or more virtual machines can be moved to lightly loaded hardware.
+
+Also, downtime for hardware maintenance can be reduced or eliminated
+by scheduling a migration before the hardware is removed from service
+~\cite{vmware}.  This also has implications for fault tolerance.  If
+an impending hardware failure is detected, the virtual machine
+instances can be moved off the faulty hardware before the failure
+occurs.
 
 \section*{Design Principles of a Multikernel}
-State and explain three design principles for a multikern
+The design principles identified in the Multikernel paper
+are~\cite{barrelfish}:
+\begin{enumerate}
+  \item Make all inter-core communication explicit.
+  \item Make OS structure hardware neutral.
+  \item View state as replicated instead of shared.
+\end{enumerate}
+
+\subsection{Explicit Communication}
+The alternative to explicit inter-core communication is to use shared
+memory for communication and/or rely on a coherent cache visible to
+all processors.
+
+An issue with the shared memory approach is the algorithms that
+maintain coherency are under increasing pressure as core count
+increases.  The authors quote studies that suggest coherency may have
+to be abandoned beyond 80 cores.
+
+Also, the authors point out that modern CPU hardware is evolving
+toward a network-on-a-chip architecture.  They argue that future
+operating systems must operate in a distributed manner to take
+advantage of this architecture change and treating the hardware as
+a network leverages previous work in distributed systems.
+
+
+\subsection{Hardware Neutral}
+The alternative to maintaining hardware neutrality is to continually
+restructure the operating system to take advantage of performance
+enhancing features offered by hardware vendors.
+
+Restructuring is a cross-cutting coding exercise that is labor
+intensive and error prone.  The authors instead suggest limiting
+hardware specific code to the message transport mechanism provided by
+hardware and to the interface boundary between the CPU and devices.
+This will reduce the surface area of code exposed to hardware changes
+allowing designers to abstract message passing algorithms without
+worrying about how the messages are passed around the system.
+
+\subsection{Replicated State}
+The alternative to replicated state is for the OS to maintain a single
+copy of shared state data.
+
+The authors justify replicating state by pointing out state
+replication can reduce the load on system interconnects associated
+with coherency.  Also, this is the only feasible approach when share
+memory is not provided by the hardware.  Finally, replication provides
+an avenue to dynamically scale the operating system based on runtime
+events (i.e. reducing power consumption).
 
 \section*{Scalability of OS Locks}
+Traditional operating systems have shared data structures that must be
+maintained by the OS.  These structures are protected by locks in
+order to serialize access by multiple threads of execution.  These
+operating systems started their life with a few locks, covering large
+areas of code.  The process of scaling has been one of reducing the
+amount of code covered by the locks while increasing the number of
+locks, the so-called granularity of the locks.  Problems have
+arisen from increasing lock granularity.
+
+One problem is the error prone nature of adding locks.  The authors
+point out the limitations of current system languages with respect to
+the relationships between locks and the data they protect.  Also,
+reasoning about lock interaction is difficult as the number of locks
+grow.  Lastly, the performance for a given lock granularity is
+dependent on the hardware.  Granular locks perform poorly on small
+numbers of cores and large locks perform badly on high core count
+machines.
+
+
 
 \bibliography{homework1}{}
 \bibliographystyle{plain}
