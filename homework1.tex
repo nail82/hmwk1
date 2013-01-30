@@ -10,52 +10,51 @@
 \begin{document}
 \maketitle
 
-\section*{Definitions}
+\section*{2. Definitions}
 \subsection*{Process switch}
 A process switch is when the operating system suspends execution of
 one process and begins executing another process selected from the
 ready queue.  This is a key feature of a multiprogramming operating
-system and it enables multiple programs to execute on a single CPU
-~\cite{stallings}.
+system and it enables multiple programs to execute on a single CPU~\cite{stallings}.
 
 \subsection*{Multiprogramming}
 Multiprogramming is the feature of an operating system that permits
 multiple programs to execute concurrently on a CPU. Generally, a
 number of executing programs are kept in main memory and the
 operating system switches between the programs based on various
-criteria ~\cite{stallings}.
+criteria~\cite{stallings}.
 
 \subsection*{System call}
 A system call is a request made by a user program to the operating
 system.  The user request is for data or a resource that requires
 execution of privileged instructions.  System calls are the means by
 which programs can do work requiring privileged access by proxying
-those requests through the operating system ~\cite{stallings}.
+those requests through the operating system~\cite{stallings}.
 
 \subsection*{Semaphore}
-A semaphore is a synchronization primitive, invented by Dijkstra
-~\cite{wikipedia-semaphore}, that can be used by cooperating processes
-or threads to access a shared resource.  Semaphores are implemented as
-a simple counter that can only be incremented or decremented using
-special, atomic function calls.  These calls may or may not block
-based on the value of the semaphore.  Semaphores are one of several
-method that processes and threads can use to coordinate their
-activities ~\cite{stallings}.  Semaphores can be used to implement
-other types of synchronization primitives such as mutexes.
+A semaphore is a synchronization primitive, invented by
+Dijkstra~\cite{wikipedia-semaphore}, that can be used by cooperating
+processes or threads to access a shared resource.  Semaphores are
+implemented as a simple counter that can only be incremented or
+decremented using special, atomic function calls.  These calls may or
+may not block based on the value of the semaphore.  Semaphores are one
+of several method that processes and threads can use to coordinate
+their activities~\cite{stallings}.  Semaphores can be used to
+implement other types of synchronization primitives such as mutexes.
 
-\section*{Process Switch Triggers}
+\section*{3. Process Switch Triggers}
 One event that can trigger a process switch is when a process exceeds
 its allotted time for continuous execution.  Another event is when the
 operating system preempts a process to execute a higher priority task.
 
-\section*{Live Migration}
+\section*{4. Live Migration}
 The term live migration refers to the process of moving an executing
 virtual machine from one physical hardware location to another.
 Typically the goal is to execute the move without disturbing the user
 of the virtual machine. VMware implements this feature as part of
-their server product line with the trade name vMotion ~\cite{vmware}.
+their server product line with the trade name vMotion~\cite{vmware}.
 
-A Wikipedia article on live migration ~\cite{wikipedia-migration}
+A Wikipedia article on live migration~\cite{wikipedia-migration}
 discusses several methods currently used to move the execution image
 of an operating virtual machine to new hardware.  The thorniest
 problems seem to lie in transporting the image of the virtual
@@ -67,15 +66,15 @@ more than one virtual machine instance comes under heavy user load,
 one or more virtual machines can be moved to lightly loaded hardware.
 
 Also, downtime for hardware maintenance can be reduced or eliminated
-by scheduling a migration before the hardware is removed from service
-~\cite{vmware}.  This also has implications for fault tolerance.  If
-an impending hardware failure is detected, the virtual machine
-instances can be moved off the faulty hardware before the failure
-occurs.
+by scheduling a migration before the hardware is removed from
+service~\cite{vmware}.  This also has implications for fault
+tolerance.  If an impending hardware failure is detected, the virtual
+machine instances can be moved off the faulty hardware before the
+failure occurs.
 
-\section*{Design Principles of a Multikernel}
-The design principles identified in the Multikernel paper
-are~\cite{barrelfish}:
+\section*{5a. Design Principles of a Multikernel}
+The design principles identified in the Multikernel paper~\cite{barrelfish}
+are:
 \begin{enumerate}
   \item Make all inter-core communication explicit.
   \item Make OS structure hardware neutral.
@@ -124,7 +123,7 @@ memory is not provided by the hardware.  Finally, replication provides
 an avenue to dynamically scale the operating system based on runtime
 events (i.e. reducing power consumption).
 
-\section*{Scalability of OS Locks}
+\section*{5c. Scalability of OS Locks}
 Traditional operating systems have shared data structures that must be
 maintained by the OS.  These structures are protected by locks in
 order to serialize access by multiple threads of execution.  These
